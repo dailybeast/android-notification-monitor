@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  notification-monitor:
+    build: .
+    container_name: android-notifications
+    restart: unless-stopped
+    privileged: true
+    volumes:
+      # Mount USB devices for ADB access
+      - /dev/bus/usb:/dev/bus/usb
+      # Mount config directory - edit apps.json without rebuilding!
+      - ./config:/app/config:ro
+      # Mount logs directory to persist logs on host
+      - ./logs:/app/logs
+    environment:
+      - SLACK_WEBHOOK_URL=${SLACK_WEBHOOK_URL}
+      - MONITORED_APPS=${MONITORED_APPS:-}
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+    # Optional: add network_mode if you need host networking
+    # network_mode: host

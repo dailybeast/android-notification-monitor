@@ -1,0 +1,21 @@
+{
+  "name": "android-notification-monitor",
+  "version": "1.0.0",
+  "description": "Monitor push notifications from Android device and forward to Slack",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node src/index.js"
+  },
+  "keywords": ["android", "notifications", "slack", "adb", "monitoring"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@slack/webhook": "^7.0.0",
+    "winston": "^3.11.0",
+    "dotenv": "^16.3.1"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

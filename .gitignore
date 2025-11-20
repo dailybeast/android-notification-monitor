@@ -1,0 +1,27 @@
+# Environment variables
+.env
+
+# Logs
+logs/
+*.log
+
+# Node modules
+node_modules/
+
+# Docker volumes
+.docker-volumes/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test files
+.test/
+coverage/
