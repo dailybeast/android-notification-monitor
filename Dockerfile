@@ -18,14 +18,8 @@ RUN npm ci --only=production
 # Copy application source
 COPY src/ ./src/
 
-# Copy default config (can be overridden with volume mount)
-COPY config/ ./config/
-
 # Create logs directory with proper permissions
 RUN mkdir -p logs && chown -R notifier:notifier logs
-
-# Note: You can override config/apps.json by mounting a volume at runtime
-# docker run -v /path/to/custom/apps.json:/app/config/apps.json:ro ...
 
 USER notifier
 

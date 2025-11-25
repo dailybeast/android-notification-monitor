@@ -5,7 +5,9 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
-    "dev": "node src/index.js"
+    "dev": "node src/index.js",
+    "build:docker": "docker build -t android-notification-monitor:latest .",
+    "build:docker:test": "docker build -t android-notification-monitor:test ."
   },
   "keywords": ["android", "notifications", "slack", "adb", "monitoring"],
   "author": "",

@@ -9,8 +9,6 @@ services:
     volumes:
       # Mount USB devices for ADB access
       - /dev/bus/usb:/dev/bus/usb
-      # Mount config directory - edit apps.json without rebuilding!
-      - ./config:/app/config:ro
       # Mount logs directory to persist logs on host
       - ./logs:/app/logs
     environment:

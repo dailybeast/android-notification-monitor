@@ -51,7 +51,7 @@ Set your Slack webhook URL and optionally configure monitored apps:
 
 ```env
 SLACK_WEBHOOK_URL=https://hooks.slack.com/services/YOUR/WEBHOOK/URL
-MONITORED_APPS=com.thedailybeast.app,com.cbsnews.android
+MONITORED_APPS={"com.thedailybeast.app":"Daily Beast","com.cbsnews.android":"CBS News"}
 LOG_LEVEL=info
 ```
 
@@ -97,7 +97,7 @@ docker run -d \
   -v /dev/bus/usb:/dev/bus/usb \
   -v /path/to/logs:/app/logs \
   -e SLACK_WEBHOOK_URL='https://hooks.slack.com/services/YOUR/WEBHOOK/URL' \
-  -e MONITORED_APPS='com.app1,com.app2' \
+  -e MONITORED_APPS='{"com.app1":"App 1","com.app2":"App 2"}' \
   -e LOG_LEVEL='info' \
   your-registry/android-notification-monitor:latest
 ```
@@ -109,30 +109,8 @@ docker run -d \
 | Variable | Required | Default | Description |
 |----------|----------|---------|-------------|
 | `SLACK_WEBHOOK_URL` | Yes | - | Slack incoming webhook URL |
-| `MONITORED_APPS` | No | All apps | Comma-separated package names to monitor |
+| `MONITORED_APPS` | No | All apps | JSON object mapping package names to friendly display names. Example: `{"com.app1":"App 1","com.app2":"App 2"}`. Leave empty to monitor all apps. |
 | `LOG_LEVEL` | No | `info` | Logging level: debug, info, warn, error |
-
-### App Name Mappings
-
-Edit `config/apps.json` to map package names to friendly display names:
-
-```json
-{
-  "com.thedailybeast.app": "Daily Beast",
-  "com.cbsnews.android": "CBS News",
-  "com.nytimes.android": "NY Times"
-}
-```
-
-**To update app mappings without rebuilding:**
-
-```bash
-# Option 1: Edit config/apps.json on host and restart container
-docker restart android-notifications
-
-# Option 2: Mount custom config file
-docker run -v /path/to/custom/apps.json:/app/config/apps.json:ro ...
-```
 
 ## Monitoring
 

@@ -113,7 +113,7 @@ class NotificationMonitor {
         adbConnected: this.adbConnection.isConnected(),
         logcatRunning: this.logcatMonitor?.isRunning() || false,
         deviceId: this.adbConnection.getDeviceId(),
-        monitoredApps: config.monitoredApps.length > 0 ? config.monitoredApps.join(', ') : 'all',
+        monitoredApps: config.getMonitoredAppsList(),
       };
 
       logger.info('Heartbeat', status);

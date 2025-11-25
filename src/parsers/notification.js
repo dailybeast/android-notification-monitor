@@ -1,17 +1,9 @@
 const logger = require('../utils/logger');
-const fs = require('fs');
-const path = require('path');
+const config = require('../utils/config');
 
 class NotificationParser {
   constructor() {
-    // Load app name mappings
-    const mappingsPath = path.join(__dirname, '../../config/apps.json');
-    try {
-      this.appMappings = JSON.parse(fs.readFileSync(mappingsPath, 'utf-8'));
-    } catch (error) {
-      logger.warn('Could not load app mappings, using package names as display names');
-      this.appMappings = {};
-    }
+    // App name mappings are now handled in config
   }
 
   parse(logLine) {
@@ -73,7 +65,7 @@ class NotificationParser {
 
       return {
         packageName: packageName || 'unknown',
-        appName: this.getAppName(packageName),
+        appName: config.getAppName(packageName),
         title: title || 'Notification',
         body: body || '',
         timestamp: new Date(),
@@ -81,11 +73,6 @@ class NotificationParser {
     }
 
     return null;
-  }
-
-  getAppName(packageName) {
-    if (!packageName) return 'Unknown App';
-    return this.appMappings[packageName] || packageName;
   }
 }
 
